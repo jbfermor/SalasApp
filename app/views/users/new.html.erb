@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex justify-content-center ">
   <div class="col-6 m-2 p-3 bg-light rounded shadow">
     <div class="d-flex justify-content-between m-2 p-3 border-bottom">
-      <h2>Nuevo Usuario</h2>
+      <h2>Nuevo Usuario <%= "de #{User.find(params[:super_id]).name}" if params[:super_id].present? %></h2>
     </div>
 
     <%= render "form", user: @user %>

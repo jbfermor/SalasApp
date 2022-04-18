@@ -8,6 +8,12 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    if current_user.admin?
+      @subordinates = User.where super_id: params[:id]
+    else
+      @subordinates = User.where super_id: current_user.id
+    end
+      
   end
 
   # GET /users/new
@@ -23,22 +29,22 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if current_user.admin? && !params[:id].present?
-      @user.super = current_user
-    elsif current_user.admin?
-      @super = User.find(params[:id])
-      @user.super = @super
-    elsif current_user.super?
-      @super = current_user
-      @user.super = @super
-    else
+    if @user.role_id.blank?
+      @user.role_id = 3
+    end
+
+    if current_user.user? 
       format.html { redirect_to user_url(@user), notice: "No tienes permiso para crear usuarios" }
+    end
+
+    if @user.super_id.blank?
+      @user.super_id = current_user.id
     end
     
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        format.html { redirect_to @user, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -62,10 +68,11 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_path, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
   end

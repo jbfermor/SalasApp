@@ -2,7 +2,7 @@
   <%= form_with(model: @user) do |form| %>
   <% if @user.errors.any? %>
   <div style="color: red">
-    <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
     <ul>
       <% @user.errors.each do |error| %>
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <% if current_user.present? && current_user.admin? %>
+  <% if current_user.present? && current_user.admin? && params[:super_id].blank? && !(@user.user?) %>
   <div class="row">
     <div class="col-12 col-lg-6 ml-2">
       <%= form.label "Rol", style: "display: block" %>
@@ -88,6 +88,9 @@
   </div>
   <% end %>
 
+  <% if params[:super_id].present? %>
+    <%= form.hidden_field :super_id, :value => params[:super_id] %>
+  <% end %>
   <div class="row">
     <div class="col-12 col-lg-6 ml-2 mt-3">
       <%= form.submit "Guardar Usuario", class: "btn btn-sm btn-primary" %>

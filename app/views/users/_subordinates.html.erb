@@ -1,0 +1,30 @@
+<div id="subordinados" class="col-lg-8 d-block mx-auto m-2 p-3">
+  <div class="d-flex justify-content-between m-2 p-3 border-bottom">
+    <h2>Subordinados</h2>
+      <!-- Button trigger modal -->
+    <%= link_to "Añadir subordinado", new_user_path(super_id: @user), 
+      class: "btn btn-sm btn-success"  %>
+  </div>
+  <div class="m-2 p-3">
+    <% if @subordinates.empty? %>
+      <p>En este momento no hay añadido ningún subordinado</p>
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <td>Usuario</td>
+            <td>Nombre</td>
+          </tr>
+        </thead>
+        <tbody>
+            <% @subordinates.each do |subordinate| %>
+            <tr>
+              <td><%= link_to subordinate.email, subordinate %></td>
+              <td><%= subordinate.name %></td>
+            </tr>
+            <% end %>    
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

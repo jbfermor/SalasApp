@@ -34,5 +34,9 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
+    <%= link_to destroy_user_session_path, method: :delete, 
+      class: "btn btn-danger mx-2" do %>
+      <%= fa_icon "power-off" , text: " Salir" %>
+    <% end %>
   </div>
 </nav>

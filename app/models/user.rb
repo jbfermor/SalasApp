@@ -13,11 +13,11 @@ class User < ApplicationRecord
   end
 
   def super?
-    role.id = 2
+    role.id == 2
   end
 
   def user?
-    role.id = 3
+    role.id == 3
   end
   
 end

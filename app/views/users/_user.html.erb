@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div id="<%= dom_id user %>" class="p-2 border-bottom">
+<div id="user_characteristics" class="p-2 border-bottom">
   <ul class="row list-group list-group-horizontal m-2">
     <li class="col-4 list-group-item">
       <%= user.nif %>
@@ -32,4 +32,10 @@
     <li class="col-6 list-group-item"><%= user.email2 %></li>
   </ul>
 </div>
+
+<% if user.super? %>
+  <div id="subordinados" class="p-2 border-bottom">
+    <%= render "users/subordinates" %>
+  </div>
+<% end %>
 

@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  post "/users", to: "users#create"
+  delete "/users/:id", to: "users#destroy"
+  
   devise_for :users
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
   resources :users
   resources :roles
   root 'home#index'
