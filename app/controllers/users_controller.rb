@@ -22,7 +22,9 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    if current_user.admin?
+    if current_user.admin? &&
+      @user.super = current_user
+    elsif current_user.admin?
       @super = User.find(params[:id])
       @user.super = @super
     elsif current_user.super?

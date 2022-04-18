@@ -12,14 +12,12 @@
 
 <div id="<%= dom_id user %>" class="p-2 border-bottom">
   <ul class="row list-group list-group-horizontal m-2">
-    <li class="col-12 list-group-item">
+    <li class="col-4 list-group-item">
       <%= user.nif %>
     </li>
   </ul>
   <ul class="row list-group list-group-horizontal m-2">
-    <li class="col-4 list-group-item"><%= user.name %></li>
-    <li class="col-4 list-group-item"><%= user.surname1 %></li>
-    <li class="col-4 list-group-item"><%= user.surname2 %></li>
+    <li class="col-12 list-group-item"><%= user.name %></li>
   </ul>
   <ul class="row list-group list-group-horizontal m-2">
     <li class="col-10 list-group-item"><%= user.address %></li>
@@ -30,22 +28,8 @@
     <li class="col-3 list-group-item"><%= user.province %></li>
   </ul>
   <ul class="row list-group list-group-horizontal m-2">
-    <li class="col-4 list-group-item"><%= user.phone1 %></li>
-    <li class="col-4 list-group-item"><%= user.phone2 %></li>
-    <li class="col-4 list-group-item"><%= user.email2 %></li>
-  </ul>
-  <ul class="row list-group list-group-horizontal m-2">
-    <% if user.suscriptor == true %>
-      <li class="col-12 list-group-item bg-primary text-center text-white">Suscripción activa</li>
-      <%= button_to "Eliminar suscripción", user_delete_suscription_path(user), 
-        method: :patch,
-        class:" col-4 mt-2 mx-auto d-block text-center btn btn-danger" %>
-    <% else %>
-      <li class="col-12 list-group-item bg-secondary text-center text-white">No hay ninguna suscripción activa</li>
-      <%= button_to "Suscribirse", user_suscription_path(user), 
-        method: :patch,
-       class:" col-2 mt-2 mx-auto d-block text-center btn btn-primary" %>
-    <% end %>
+    <li class="col-6 list-group-item"><%= user.phone %></li>
+    <li class="col-6 list-group-item"><%= user.email2 %></li>
   </ul>
 </div>
 
