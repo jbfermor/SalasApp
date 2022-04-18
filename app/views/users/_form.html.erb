@@ -1,57 +1,98 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div id="form" class="m-2 p-3">
+  <%= form_with(model: @user) do |form| %>
+  <% if @user.errors.any? %>
+  <div style="color: red">
+    <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul>
+      <% @user.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="row">
+    <div class="col-lg-6 ml-2 mr-1">
+      <%= form.label "Email", style: "display: block" %>
+      <%= form.text_field :email, class: "form-control" %>
+    </div>
+
+    <% if @user.encrypted_password.blank? %>
+    <div class="col-lg-6 mr-2 ml-1">
+      <%= form.label "Password", style: "display: block" %>
+      <%= form.text_field :password, class: "form-control" %>
+    </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
+  <div class="row">
+    <div class="col-6 col-lg-4 ml-2">
+      <%= form.label "NIF", style: "display: block" %>
+      <%= form.text_field :nif, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
+  <div class="row">
+    <div class="col-12 col-lg-6 ml-2">
+      <%= form.label "Nombre", style: "display: block" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12 col-lg-6 ml-2">
+      <%= form.label "Direccion", style: "display: block" %>
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :pc, style: "display: block" %>
-    <%= form.text_field :pc %>
+  <div class="row">
+    <div class="col-12 col-lg-6 ml-2">
+      <%= form.label "Localidad", style: "display: block" %>
+      <%= form.text_field :city, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :province, style: "display: block" %>
-    <%= form.text_field :province %>
+  <div class="row">
+    <div class="col-lg-6 ml-2 mr-1">
+      <%= form.label "Provincia", style: "display: block" %>
+      <%= form.text_field :province, class: "form-control" %>
+    </div>
+
+    <div class="col-lg-6 mr-2 ml-1">
+      <%= form.label "CP", style: "display: block" %>
+      <%= form.text_field :pc, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
+  <div class="row">
+    <div class="col-12 col-lg-4 ml-2">
+      <%= form.label "Telefono", style: "display: block" %>
+      <%= form.text_field :phone1, class: "form-control" %>
+    </div>
+
+    <div class="col-12 col-lg-4 mr-2">
+      <%= form.label "Email alternativo", style: "display: block" %>
+      <%= form.text_field :email2, class: "form-control" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :email2, style: "display: block" %>
-    <%= form.text_field :email2 %>
+  <% if current_user.present? && current_user.role_id == 1%>
+  <div class="row">
+    <div class="col-12 col-lg-6 ml-2">
+      <%= form.label "Rol", style: "display: block" %>
+      <%= form.collection_select :role_id, Role.all, :id, :name, 
+      class: "form-select" %>
+    </div> 
+  </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-12 col-lg-6 ml-2 mt-3">
+      <%= form.submit "Guardar Usuario", class: "btn btn-sm btn-primary" %>
+    </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :role_id, style: "display: block" %>
-    <%= form.text_field :role_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

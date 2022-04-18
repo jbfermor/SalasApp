@@ -22,6 +22,16 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    if current_user.admin?
+      @super = User.find(params[:id])
+      @user.super = @super
+    elsif current_user.super?
+      @super = current_user
+      @user.super = @super
+    else
+      format.html { redirect_to user_url(@user), notice: "No tienes permiso para crear usuarios" }
+    end
+    
 
     respond_to do |format|
       if @user.save
@@ -65,6 +75,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :address, :city, :pc, :province, :phone, :email2, :role_id)
+      params.require(:user).permit(:name, :address, :city, :pc, :province, :phone, :email2, :role_id, :super_id)
     end
 end

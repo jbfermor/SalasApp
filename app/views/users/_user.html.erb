@@ -1,42 +1,51 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= user.address %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= user.city %>
-  </p>
-
-  <p>
-    <strong>Pc:</strong>
-    <%= user.pc %>
-  </p>
-
-  <p>
-    <strong>Province:</strong>
-    <%= user.province %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= user.phone %>
-  </p>
-
-  <p>
-    <strong>Email2:</strong>
-    <%= user.email2 %>
-  </p>
-
-  <p>
-    <strong>Role:</strong>
-    <%= user.role_id %>
-  </p>
-
+<div id="<%= dom_id user %>"class="d-flex justify-content-between m-2 p-3 border-bottom">
+  <h2><%= user.email %></h2>
+  <div class="btn-group mx-3" role="group" aria-label="usuario">
+    <%= link_to edit_user_path, class: "btn btn-warning" do %>
+      <%= fa_icon "exchange" , text: " Editar" %>
+    <% end %>
+    <%= button_to user_path(user), method: :delete, class: "btn btn-danger" do %>
+      <%= fa_icon "trash" , text: " Eliminar" %>
+    <% end %>
+  </div>
 </div>
+
+<div id="<%= dom_id user %>" class="p-2 border-bottom">
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-12 list-group-item">
+      <%= user.nif %>
+    </li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-4 list-group-item"><%= user.name %></li>
+    <li class="col-4 list-group-item"><%= user.surname1 %></li>
+    <li class="col-4 list-group-item"><%= user.surname2 %></li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-10 list-group-item"><%= user.address %></li>
+    <li class="col-2 list-group-item"><%= user.pc %></li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-9 list-group-item"><%= user.city %></li>
+    <li class="col-3 list-group-item"><%= user.province %></li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-4 list-group-item"><%= user.phone1 %></li>
+    <li class="col-4 list-group-item"><%= user.phone2 %></li>
+    <li class="col-4 list-group-item"><%= user.email2 %></li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <% if user.suscriptor == true %>
+      <li class="col-12 list-group-item bg-primary text-center text-white">Suscripción activa</li>
+      <%= button_to "Eliminar suscripción", user_delete_suscription_path(user), 
+        method: :patch,
+        class:" col-4 mt-2 mx-auto d-block text-center btn btn-danger" %>
+    <% else %>
+      <li class="col-12 list-group-item bg-secondary text-center text-white">No hay ninguna suscripción activa</li>
+      <%= button_to "Suscribirse", user_suscription_path(user), 
+        method: :patch,
+       class:" col-2 mt-2 mx-auto d-block text-center btn btn-primary" %>
+    <% end %>
+  </ul>
+</div>
+

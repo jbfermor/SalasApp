@@ -4,4 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :role
+  belongs_to :super, class_name: "User", optional: true
+
+  has_many :subordinates, class_name: "User", foreign_key: "super_id"
+
+  def admin?
+    current_user.id = 1
+  end
+
+  def super?
+    current_user.id = 2
+  end
+
+  def user?
+    current_user.id = 3
+  end
+  
 end

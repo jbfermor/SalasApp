@@ -1,10 +1,53 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @user %>
-
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-
-  <%= button_to "Destroy this user", @user, method: :delete %>
+<div class="container-fluid d-flex justify-content-center ">
+  <div class="col-lg-6 col-10 m-2 p-3 bg-light rounded shadow">
+    <%= render @user %>
+    <div class="rounded shadow p-3">
+    </div>
+    <div id="page_navigation">
+      <div class="row m-1 p-2">
+        <%= link_to users_path, class: "btn btn-dark" do %>
+          <%= fa_icon "undo", text: " Volver a Usuarios" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<% if current_user.admin?  %>
+  <div class="container-fluid d-flex justify-content-center ">
+    <div class="col-lg-6 col-10 m-2 p-3 bg-light rounded shadow">
+      <div class="m2 p-3">
+        <div class="d-flex justify-content-between m-2 p-3 border-bottom">
+          <h2>Menús</h2>
+          <%= link_to new_menu_path, class: "btn btn-success" do %>
+              <%= fa_icon "plus", text: "Nuevo menu" %>
+          <% end %>
+        </div>
+        <%= render "/menus/tabla_menu_index" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid d-flex justify-content-center ">
+    <div class="col-lg-6 col-10 m-2 p-3 bg-light rounded shadow">
+      <div class="m2 p-3">
+      <div class="d-flex justify-content-between m-2 p-3 border-bottom">
+        <h2>Platos</h2>
+        <%= link_to new_recipe_path, class: "btn btn-success" do %>
+            <%= fa_icon "plus", text: "Nuevo plato" %>
+        <% end %>
+      </div>
+      <%= render "/recipes/tabla_recipe_index" %>
+    </div>
+  </div>
+<% end %>
+
+<div id="page_navigation">
+  <div class="row m-1 p-2">
+    <%= link_to users_path, class: "btn btn-danger" do %>
+      <%= fa_icon "arrow-left", text: " Volver a Usuarios" %>
+    <% end %>
+  </div>
+</div>
+  
+
