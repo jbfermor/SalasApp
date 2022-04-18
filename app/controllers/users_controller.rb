@@ -22,7 +22,8 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    if current_user.admin? &&
+
+    if current_user.admin? && !params[:id].present?
       @user.super = current_user
     elsif current_user.admin?
       @super = User.find(params[:id])
@@ -77,6 +78,8 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :address, :city, :pc, :province, :phone, :email2, :role_id, :super_id)
+      params.require(:user).permit(:email, :password, :nif, :name, 
+        :address, :city, :pc, :province, :phone, :email2, 
+        :role_id, :super_id)
     end
 end
