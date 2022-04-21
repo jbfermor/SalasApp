@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rooms
   resources :teches
   post "/users", to: "users#create"
   delete "/users/:id", to: "users#destroy"
