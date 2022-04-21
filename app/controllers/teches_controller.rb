@@ -22,6 +22,9 @@ class TechesController < ApplicationController
   # POST /teches or /teches.json
   def create
     @tech = Tech.new(tech_params)
+    if @tech.user_id.nil?
+      @tech.user = current_user
+    end
 
     respond_to do |format|
       if @tech.save

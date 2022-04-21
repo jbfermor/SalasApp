@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid d-flex justify-content-center ">
+  <div class="col-lg-6 col-10 m-2 p-3 bg-light rounded shadow">
+    <%= render @tech %>
+  </div>
+</div>
 
-<%= render @tech %>
-
-<div>
-  <%= link_to "Edit this tech", edit_tech_path(@tech) %> |
-  <%= link_to "Back to teches", teches_path %>
-
-  <%= button_to "Destroy this tech", @tech, method: :delete %>
+<div id="page_navigation">
+  <div class="row m-1 p-2">
+    <%= link_to teches_path, class: "btn btn-danger" do %>
+      <%= fa_icon "arrow-left", text: " Volver a técnicos" %>
+    <% end %>
+  </div>
 </div>

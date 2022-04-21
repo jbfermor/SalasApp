@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Teches</h1>
+<div class="container-fluid d-flex justify-content-center">
 
-<div id="teches">
-  <% @teches.each do |tech| %>
-    <%= render tech %>
-    <p>
-      <%= link_to "Show this tech", tech %>
-    </p>
-  <% end %>
+  <div class="col-lg-8 col-md-10 bg-light rounded shadow">
+    <div class="d-flex justify-content-between m-2 p-3 border-bottom">
+      <h2>Técnicos</h2>
+      <% if current_user.super? %>
+        <%= link_to new_tech_path, class: "btn btn-success" do %>
+          <%= fa_icon "plus", text: "Nuevo técnico" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div id="tecnicos" class="col-lg-8 d-block mx-auto m-2 p-3">
+      <% if current_user.admin? %>
+        <p>Para añadir un técnico, hazlo desde el perfl de la empresa</p>
+      <% end %>
+      <%= render "teches/table_teches_index" %>
+    </div>
+
+    <div id="page_navigation">
+      <div class="row m-1 p-2">
+        <%= link_to root_path, class: "btn btn-dark" do %>
+          <%= fa_icon "home", text: " Página Principal" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<%= link_to "New tech", new_tech_path %>

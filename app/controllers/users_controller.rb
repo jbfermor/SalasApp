@@ -10,8 +10,10 @@ class UsersController < ApplicationController
   def show
     if current_user.admin?
       @subordinates = User.where super_id: params[:id]
+      @teches = Tech.where user_id: params[:id]
     else
       @subordinates = User.where super_id: current_user.id
+      @teches = Tech.where user_id: current_user.id
     end
       
   end
