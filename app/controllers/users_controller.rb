@@ -9,10 +9,17 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     if current_user.admin?
-      @subordinates = User.where user_id: params[:id]
-      @teches = Tech.where user_id: User.find(params[:id]).super_id
-      @rooms = Room.where user_id: User.find(params[:id]).super_id
-      @reservations = Reservation.where user_id: User.find(params[:id]).super_id
+      usuario = User.find(params[:id])
+      @subordinates = User.where super_id: usuario
+      if usuario.user?
+        @teches = Tech.where user_id: usuario.super_id
+        @rooms = Room.where user_id: User.find(params[:id]).super_id
+        @reservations = Reservation.where user_id: User.find(params[:id]).super_id
+      else
+        @teches = Tech.where user_id: usuario
+        @rooms = Room.where user_id: usuario
+        @reservations = Reservation.where user_id: usuario
+      end
     elsif current_user.super?
       @subordinates = User.where super_id: current_user.id
       @teches = Tech.where user_id: current_user.id
