@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reservations
   resources :rooms
   resources :teches
   post "/users", to: "users#create"

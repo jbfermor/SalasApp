@@ -1,10 +1,23 @@
-<h1>Editing room</h1>
+<div class="container-fluid d-flex justify-content-center ">
+  <div class="col-6 m-2 p-3 bg-light rounded shadow">
+    <div class="d-flex justify-content-between m-2 p-3 border-bottom">
+      <h2>Editar técnico</h2>
+    </div>
 
-<%= render "form", room: @room %>
+    <%= render "form", role: @room %>
 
-<br>
+    <div id="page_navigation">
+      <div class="row m-1 p-2">
+        <%= link_to @room, class: "btn btn-info" do %>
+          <%= fa_icon "eye", text: " Mostrar #{@room.name}" %>
+        <% end %>
+      </div>
 
-<div>
-  <%= link_to "Show this room", @room %> |
-  <%= link_to "Back to rooms", rooms_path %>
+      <div class="row m-1 p-2">
+        <%= link_to rooms_path, class: "btn btn-danger" do %>
+          <%= fa_icon "undo", text: " Volver a Usuarios" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

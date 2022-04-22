@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_21_105644) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_21_113021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "reservations", force: :cascade do |t|
+    t.date "day"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "title"
+    t.text "description"
+    t.text "tools"
+    t.text "others"
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.bigint "tech_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_reservations_on_room_id"
+    t.index ["tech_id"], name: "index_reservations_on_tech_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -60,6 +78,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_21_105644) do
     t.index ["super_id"], name: "index_users_on_super_id"
   end
 
+  add_foreign_key "reservations", "rooms"
+  add_foreign_key "reservations", "teches"
+  add_foreign_key "reservations", "users"
   add_foreign_key "rooms", "users"
   add_foreign_key "teches", "users"
   add_foreign_key "users", "roles"

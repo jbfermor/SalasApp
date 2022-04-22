@@ -1,0 +1,22 @@
+<% if @reservations.empty? %>
+<p>No hay reservas añadidas todavía</p>
+<% else %>
+<table>
+  <thead>
+    <tr>
+      <td>Fecha</td>
+      <td>Hora</td>
+      <td>Título</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+    <tr>
+      <td><%= reservation.day %></td>
+      <td><%= reservation.hour %></td>
+      <td><%= link_to reservation.title, reservation %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

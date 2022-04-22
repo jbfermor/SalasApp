@@ -16,12 +16,12 @@
     <%= form.text_field :name %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
+  <% if params[:user_id].present? %>
+    <%= form.hidden_field :user_id, :value => params[:user_id]  %>
+  <% end %>
 
   <div>
     <%= form.submit %>
   </div>
+  
 <% end %>

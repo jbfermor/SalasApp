@@ -39,9 +39,13 @@
   </div>
 <% end %>
 
-<% unless user.user? %>
-  <div id="teches" class="p-2 border-bottom">
-    <%= render "users/teches" %>
-  </div>      
-<% end %>
+<div id="reservations" class="p-2 border-bottom">
+  <%= render "users/reservations" %>
+</div>
+<div id="teches" class="p-2 border-bottom">
+  <%= render "users/teches" %>
+</div>
+<div id="rooms" class="p-2 border-bottom">
+  <%= render "users/rooms" %>
+</div>        
 

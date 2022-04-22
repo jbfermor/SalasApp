@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 2022-04-21
+  hour: 2022-04-21 13:30:21
+  title: MyString
+  description: MyText
+  tools: MyText
+  others: MyText
+  user: one
+  room: one
+  tech: one
+
+two:
+  day: 2022-04-21
+  hour: 2022-04-21 13:30:21
+  title: MyString
+  description: MyText
+  tools: MyText
+  others: MyText
+  user: two
+  room: two
+  tech: two

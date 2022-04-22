@@ -1,12 +1,18 @@
-<div id="<%= dom_id room %>">
-  <p>
-    <strong>Name:</strong>
-    <%= room.name %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= room.user_id %>
-  </p>
-
+<div id="<%= dom_id room %>"class="d-flex justify-content-between m-2 p-3 border-bottom">
+  <h2><%= room.name %></h2>
+  <div class="btn-group mx-3" role="group" aria-label="usuario">
+    <%= link_to edit_room_path, class: "btn btn-warning" do %>
+      <%= fa_icon "exchange" , text: " Editar" %>
+    <% end %>
+    <%= button_to room_path(room), method: :delete, class: "btn btn-danger" do %>
+      <%= fa_icon "trash" , text: " Eliminar" %>
+    <% end %>
+  </div>
 </div>
+
+<div id="room_characteristics" class="p-2 border-bottom">
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-12 list-group-item"><%= room.name %></li>
+  </ul>
+</div>
+

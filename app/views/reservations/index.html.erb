@@ -3,19 +3,19 @@
 
   <div class="col-lg-8 col-md-10 bg-light rounded shadow">
     <div class="d-flex justify-content-between m-2 p-3 border-bottom">
-      <h2>Salas</h2>
+      <h2>Reservas</h2>
       <% if current_user.super? %>
-        <%= link_to new_room_path, class: "btn btn-success" do %>
-          <%= fa_icon "plus", text: "Nuevo técnico" %>
+        <%= link_to new_reservation_path, class: "btn btn-success" do %>
+          <%= fa_icon "plus", text: "Nueva reserva" %>
         <% end %>
       <% end %>
     </div>
 
     <div id="salas" class="col-lg-8 d-block mx-auto m-2 p-3">
       <% if current_user.admin? %>
-        <p>Para añadir una sala, hazlo desde el perfil de la empresa</p>
+        <p>Para añadir una reserva, hazlo desde el perfil de la empresa</p>
       <% end %>
-      <%= render "rooms/table_rooms_index" %>
+      <%= render "reservations/table_reservations_index" %>
     </div>
 
     <div id="page_navigation">
