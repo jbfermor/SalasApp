@@ -4,17 +4,22 @@
 <table>
   <thead>
     <tr>
-      <td>Fecha</td>
-      <td>Hora</td>
       <td>Título</td>
+      <td>Fecha</td>
+      <td>Inicio</td>
+      <td>Fin</td>
+      <td>Técnico</td>
     </tr>
   </thead>
   <tbody>
     <% @reservations.each do |reservation| %>
     <tr>
-      <td><%= reservation.day %></td>
-      <td><%= reservation.hour %></td>
       <td><%= link_to reservation.title, reservation %></td>
+      <td><%= reservation.day.strftime("%d/%m/%Y") %></td>
+      <td><%= reservation.start_time.strftime("%H:%M") %></td>
+      <td><%= reservation.end_time.strftime("%H:%M") %></td>
+      <td><%= link_to reservation.tech.name, reservation.tech %></td>
+      
     </tr>
     <% end %>
   </tbody>

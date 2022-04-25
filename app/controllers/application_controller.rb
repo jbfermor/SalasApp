@@ -9,4 +9,5 @@ class ApplicationController < ActionController::Base
       :address, :pc, :city, :province, 
       :phone, :email2, :role_id, :super_id])
   end
+
 end

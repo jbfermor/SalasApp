@@ -1,10 +1,19 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid d-flex justify-content-center ">
+  <div class="col-lg-6 col-10 m-2 p-3 bg-light rounded shadow">
+    <%= render @reservation %>
+  </div>
+</div>
 
-<%= render @reservation %>
-
-<div>
-  <%= link_to "Edit this reservation", edit_reservation_path(@reservation) %> |
-  <%= link_to "Back to reservations", reservations_path %>
-
-  <%= button_to "Destroy this reservation", @reservation, method: :delete %>
+<div id="page_navigation">
+  <div class="row m-1 p-2">
+    <% if current_user.admin? %>
+      <%= link_to users_path, class: "btn btn-danger" do %>
+        <%= fa_icon "arrow-left", text: " Volver a usuarios" %>
+      <% end %>
+    <% else %>
+      <%= link_to current_user, class: "btn btn-danger" do %>
+        <%= fa_icon "arrow-left", text: " Volver al perfil" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

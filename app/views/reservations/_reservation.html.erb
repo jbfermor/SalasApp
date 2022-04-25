@@ -1,47 +1,24 @@
-<div id="<%= dom_id reservation %>">
-  <p>
-    <strong>Day:</strong>
-    <%= reservation.day %>
-  </p>
+<div id="<%= dom_id reservation %>"class="d-flex justify-content-between m-2 p-3 border-bottom">
+  <h2><%= reservation.title %></h2>
+  <div class="btn-group mx-3" role="group" aria-label="usuario">
+    <%= link_to edit_reservation_path, class: "btn btn-warning" do %>
+      <%= fa_icon "exchange" , text: " Editar" %>
+    <% end %>
+    <%= button_to reservation_path(reservation), method: :delete, class: "btn btn-danger" do %>
+      <%= fa_icon "trash" , text: " Eliminar" %>
+    <% end %>
+  </div>
+</div>
 
-  <p>
-    <strong>Hour:</strong>
-    <%= reservation.hour %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= reservation.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= reservation.description %>
-  </p>
-
-  <p>
-    <strong>Tools:</strong>
-    <%= reservation.tools %>
-  </p>
-
-  <p>
-    <strong>Others:</strong>
-    <%= reservation.others %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= reservation.user_id %>
-  </p>
-
-  <p>
-    <strong>Room:</strong>
-    <%= reservation.room_id %>
-  </p>
-
-  <p>
-    <strong>Tech:</strong>
-    <%= reservation.tech_id %>
-  </p>
-
+<div id="reservation_characteristics" class="p-2 border-bottom">
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-3 list-group-item"><%= reservation.day.strftime("%d/%m/%Y") %></li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-2 list-group-item"><%= reservation.start_time.strftime("%H:%M") %></li>
+    <li class="col-2 list-group-item"><%= reservation.end_time.strftime("%H:%M") %></li>
+  </ul>
+  <ul class="row list-group list-group-horizontal m-2">
+    <li class="col-12 list-group-item"><%= reservation.description %></li>
+  </ul>
 </div>
