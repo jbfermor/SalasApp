@@ -15,6 +15,13 @@
       <% if current_user.admin? %>
         <p>Para añadir una reserva, hazlo desde el perfil de la empresa</p>
       <% end %>
+      <%= render "simple_calendar/schedule_table" %>
+    </div>
+
+    <div id="salas" class="col-lg-8 d-block mx-auto m-2 p-3">
+      <% if current_user.admin? %>
+        <p>Para añadir una reserva, hazlo desde el perfil de la empresa</p>
+      <% end %>
       <%= render "reservations/table_reservations_index" %>
     </div>
 

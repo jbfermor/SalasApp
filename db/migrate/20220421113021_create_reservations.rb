@@ -2,8 +2,8 @@ class CreateReservations < ActiveRecord::Migration[7.0]
   def change
     create_table :reservations do |t|
       t.date :day
-      t.time :start_time
-      t.time :end_time
+      t.datetime :start_time
+      t.datetime :end_time
       t.string :title
       t.text :description
       t.text :tools

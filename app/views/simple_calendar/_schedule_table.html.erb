@@ -1,0 +1,13 @@
+<%= month_calendar(events: @reservations) do |date, reservations| %>
+  <%= date.day %>
+  <% reservations.each do |reservation| %>
+    <div class="row">
+      <div class="col-1">
+        <%= link_to reservation.title, reservation, 
+          class: "badge bg-success rounded-pill",
+          style: "width: 5rem; text-overflow: ellipsis; overflow: hidden",
+          title: reservation.title %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

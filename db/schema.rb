@@ -16,8 +16,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_21_113021) do
 
   create_table "reservations", force: :cascade do |t|
     t.date "day"
-    t.time "start_time"
-    t.time "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string "title"
     t.text "description"
     t.text "tools"

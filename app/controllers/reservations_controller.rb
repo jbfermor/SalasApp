@@ -16,14 +16,12 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/1 or /reservations/1.json
   def show
+
   end
 
   # GET /reservations/new
   def new
     @reservation = Reservation.new
-    
-    
-    
   end
 
   # GET /reservations/1/edit
@@ -36,17 +34,18 @@ class ReservationsController < ApplicationController
     @reservation.day = Date.civil(params[:reservation]["day(1i)"].to_i, 
       params[:reservation]["day(2i)"].to_i, 
       params[:reservation]["day(3i)"].to_i)
-    @reservation.start_time = Time.new(params[:reservation]["start_time(1i)"].to_i,
-      params[:reservation]["start_time(2i)"].to_i,
-      params[:reservation]["start_time(3i)"].to_i,
+    @reservation.start_time = Time.new(params[:reservation]["day(1i)"].to_i,
+      params[:reservation]["day(2i)"].to_i,
+      params[:reservation]["day(3i)"].to_i,
       params[:reservation]["start_time(4i)"].to_i,
       params[:reservation]["start_time(5i)"].to_i)
-    @reservation.end_time = Time.new(params[:reservation]["end_time(1i)"].to_i,
-      params[:reservation]["end_time(2i)"].to_i, 
-      params[:reservation]["end_time(3i)"].to_i,
+    @reservation.end_time = Time.new(params[:reservation]["day(1i)"].to_i,
+      params[:reservation]["day(2i)"].to_i, 
+      params[:reservation]["day(3i)"].to_i,
       params[:reservation]["end_time(4i)"].to_i,
       params[:reservation]["end_time(5i)"].to_i)
     @reservation.room_id = params[:reservation]["room_id"].to_i
+    @reservation.user_id = current_user.id if params[:user_id].nil?
     
 
     respond_to do |format|
