@@ -36,22 +36,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
 
-    @reservation.day = Date.civil(params[:reservation]["day(1i)"].to_i, 
-    params[:reservation]["day(2i)"].to_i, 
-    params[:reservation]["day(3i)"].to_i)
-    @reservation.start_time = Time.new(params[:reservation]["day(1i)"].to_i,
-    params[:reservation]["day(2i)"].to_i,
-    params[:reservation]["day(3i)"].to_i,
-    params[:reservation]["start_time(4i)"].to_i,
-    params[:reservation]["start_time(5i)"].to_i)
-    @reservation.end_time = Time.new(params[:reservation]["day(1i)"].to_i,
-    params[:reservation]["day(2i)"].to_i, 
-    params[:reservation]["day(3i)"].to_i,
-    params[:reservation]["end_time(4i)"].to_i,
-    params[:reservation]["end_time(5i)"].to_i - 1)
-    @reservation.room_id = params[:reservation]["room_id"].to_i
-    @reservation.user_id = current_user.id if params[:user_id].nil?
-    
+    set_new_reservation(@reservation)
     
     if occupied?(@reservation)
         redirect_to reservations_path, alert: "Ya hay una reserva para esa fecha y hora"
@@ -95,6 +80,34 @@ class ReservationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
+    end
+
+    def set_new_reservation(reservation)
+      reservation.day = Date.civil(params[:reservation]["day(1i)"].to_i, 
+      params[:reservation]["day(2i)"].to_i, 
+      params[:reservation]["day(3i)"].to_i)
+      reservation.start_time = Time.new(params[:reservation]["day(1i)"].to_i,
+      params[:reservation]["day(2i)"].to_i,
+      params[:reservation]["day(3i)"].to_i,
+      params[:reservation]["start_time(4i)"].to_i,
+      params[:reservation]["start_time(5i)"].to_i)
+
+      if params[:reservation]["end_time(5i)"] == "00"
+        reservation.end_time = Time.new(params[:reservation]["day(1i)"].to_i,
+        params[:reservation]["day(2i)"].to_i, 
+        params[:reservation]["day(3i)"].to_i,
+        params[:reservation]["end_time(4i)"].to_i - 1,
+        59)
+      else
+        reservation.end_time = Time.new(params[:reservation]["day(1i)"].to_i,
+        params[:reservation]["day(2i)"].to_i, 
+        params[:reservation]["day(3i)"].to_i,
+        params[:reservation]["end_time(4i)"].to_i,
+        29)
+      end
+
+    reservation.room_id = params[:reservation]["room_id"].to_i
+    reservation.user_id = current_user.id if params[:user_id].nil?
     end
 
     def set_select_collections
