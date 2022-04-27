@@ -1,7 +1,7 @@
 <div class="simple-calendar">
-  <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+  <div class="calendar-heading m-2 p-3">
+    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, class: "btn btn-sm btn-primary" %>
+    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: "btn btn-sm btn-primary" %>
   </div>
 
   <table class="table">
@@ -23,7 +23,7 @@
             <td colspan="1"> <%= h.to_s + ":00" %> </td>
             <% if is_used(sorted_events.fetch(day, []), h) %>
               <td colspan="9" class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> 
-                title= <%= is_used(sorted_events.fetch(day, []), h).title %> >
+                title= <%= is_used(sorted_events.fetch(day, []), h).room.name %> >
                 <%= link_to is_used(sorted_events.fetch(day, []), h).title, is_used(sorted_events.fetch(day, []), h) %> 
               </td>
             <% end %>
