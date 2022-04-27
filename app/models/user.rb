@@ -3,10 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
   belongs_to :role
-  belongs_to :super, class_name: "User", optional: true
 
+  belongs_to :super, class_name: "User", optional: true
   has_many :subordinates, class_name: "User", foreign_key: "super_id"
+
+  has_many :rooms
+  has_many :teches
+  has_many :reservations
 
   def admin?
     role.id == 1

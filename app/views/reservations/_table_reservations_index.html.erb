@@ -8,6 +8,7 @@
       <td>Fecha</td>
       <td>Inicio</td>
       <td>Fin</td>
+      <td>Sala</td>
       <td>Técnico</td>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <td><%= reservation.day.strftime("%d/%m/%Y") %></td>
       <td><%= reservation.start_time.strftime("%H:%M") %></td>
       <td><%= reservation.end_time.strftime("%H:%M") %></td>
+      <td><%= link_to reservation.room.name, reservation.room %></td>
       <td><%= link_to reservation.tech.name, reservation.tech %></td>
       
     </tr>

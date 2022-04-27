@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SalasApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+<head>
+  <title>SalasApp</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
 
-  </head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-  <body>
+</head>
 
-    <!-- header -->
-    <% if user_signed_in? %>
-      <header class="py-3 bg-light">
-        <div class="row me-3">
-          <div class="col-12 text-end">
-            <span class="text-muted"><%= current_user.email %></span>
-          </div>
-        </div>
-      </header>
-    <% end %>
+<body>
 
-    <p style="color: green"><%= notice %></p>
+  <!-- header -->
+  <% if user_signed_in? %>
+  <header class="pb-3 bg-light">
+    <div class="row me-3 pt-3">
+      <div class="col-12 text-end">
+        <span class="text-muted"><%= current_user.email %></span>
+      </div>
+    </div>
+  </header>
+  <% end %>
 
-    <%= render "layouts/navbar" %>
+  <div class="row">
+    <div class="col-12">
+      <p style="color: white; background-color:green"><%= notice %></p>
+      <p style="color: white; background-color:red"><%= alert %></p>
+    </div>
+  </div>
 
-    <div class="container-fluid d-flex justify-content-center">
+  <div class="row">
+    <div class="col-12">
+      <%= render "layouts/navbar" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
       <%= yield %>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </div>
 
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+  </script>
+
+</body>
 
 </html>

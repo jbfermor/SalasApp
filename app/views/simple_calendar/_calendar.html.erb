@@ -1,31 +1,33 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
     <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
     <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
   </div>
 
   <table class="table">
     <thead>
       <tr>
-        <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% date_range.each do |day| %>
+          <th colspan="10"> <%= t('date.day_names')[day.wday]%>, <%= day.strftime("%d") %> de <%= t('date.month_names')[day.month] %> </th>
         <% end %>
       </tr>
+      <tr>
+        <th colspan="1">Hora</th>
+        <th colspan="9">Eventos</th>
+      </tr>
     </thead>
-
     <tbody>
-      <% date_range.each_slice(7) do |week| %>
-        <%= content_tag :tr, class: calendar.tr_classes_for(week) do %>
-          <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
-              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
-                <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
-              <% else %>
-                <% passed_block.call day, sorted_events.fetch(day, []) %>
-              <% end %>
+      <% date_range.each do |day| %>
+        <% @hours.each do |h|%>
+          <tr>   
+            <td colspan="1"> <%= h.to_s + ":00" %> </td>
+            <% if is_used(sorted_events.fetch(day, []), h) %>
+              <td colspan="9" class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> 
+                title= <%= is_used(sorted_events.fetch(day, []), h).title %> >
+                <%= link_to is_used(sorted_events.fetch(day, []), h).title, is_used(sorted_events.fetch(day, []), h) %> 
+              </td>
             <% end %>
-          <% end %>
+          </tr>
         <% end %>
       <% end %>
     </tbody>

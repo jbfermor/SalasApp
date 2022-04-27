@@ -11,8 +11,8 @@
         <%= fa_icon "arrow-left", text: " Volver a usuarios" %>
       <% end %>
     <% else %>
-      <%= link_to current_user, class: "btn btn-danger" do %>
-        <%= fa_icon "arrow-left", text: " Volver al perfil" %>
+      <%= link_to reservations_path, class: "btn btn-danger" do %>
+        <%= fa_icon "arrow-left", text: " Volver a reservas" %>
       <% end %>
     <% end %>
   </div>

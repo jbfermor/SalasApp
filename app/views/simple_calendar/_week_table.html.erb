@@ -1,0 +1,28 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <%= link_to "Mes", reservations_path, 
+      class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Semana", reservations_path(table: "week"), 
+      class: "nav-link active" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Dia", reservations_path(table: "day"), 
+    class: "nav-link" %>
+  </li>
+</ul>
+
+<%= week_calendar(events: @reservations) do |date, reservations| %>
+  <%= date.day %>
+  <% reservations.each do |reservation| %>
+    <div class="row">
+      <div class="col-1">
+        <%= link_to reservation.room.name, reservation, 
+          class: "badge bg-success rounded-pill",
+          style: "width: 5rem; text-overflow: ellipsis; overflow: hidden",
+          title: reservation.title %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
