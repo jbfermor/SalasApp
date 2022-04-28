@@ -16,7 +16,7 @@
   </ul>
   <ul class="row list-group list-group-horizontal m-2">
     <li class="col-2 list-group-item"><%= reservation.start_time.strftime("%H:%M") %></li>
-    <li class="col-2 list-group-item"><%= reservation.end_time.strftime("%H:%M") %></li>
+    <li class="col-2 list-group-item"><%= (reservation.end_time + 1.minute).strftime("%H:%M") %></li>
   </ul>
   <ul class="row list-group list-group-horizontal m-2">
     <li class="col-12 list-group-item"><%= reservation.description %></li>

@@ -2,8 +2,10 @@
 
 <%= render "form", reservation: @reservation %>
 
-<br>
-
-<div>
-  <%= link_to "Back to reservations", reservations_path %>
+<div id="page_navigation">
+  <div class="row m-1 p-2">
+    <%= link_to root_path, class: "btn btn-dark" do %>
+      <%= fa_icon "home", text: " Página Principal" %>
+    <% end %>
+  </div>
 </div>

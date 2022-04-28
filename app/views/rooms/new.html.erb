@@ -6,20 +6,13 @@
 
     <%= render "form", room: @room %>
 
-      <div id="page_navigation">
-        <div class="row m-1 p-2">
-          <% if current_user.super? %>
-            <%= link_to rooms_path, class: "btn btn-danger" do %>
-              <%= fa_icon "arrow-left", text: " Volver a técnicos" %>
-            <% end %>
-          <% elsif current_user.admin? %>
-            <%= link_to User.find(params[:user_id]), class: "btn btn-danger" do %>
-              <%= fa_icon "arrow-left", text: " Volver a #{User.find(params[:user_id]).name}" %>
-            <% end %>
-          <% end %>
-          
-        </div>
+    <div id="page_navigation">
+      <div class="row m-1 p-2">
+        <%= link_to root_path, class: "btn btn-dark" do %>
+          <%= fa_icon "home", text: " Página Principal" %>
+        <% end %>
       </div>
+    </div>
       
   </div>
 </div>

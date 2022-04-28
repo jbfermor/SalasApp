@@ -66,13 +66,21 @@ class ReservationsController < ApplicationController
 
   # PATCH/PUT /reservations/1 or /reservations/1.json
   def update
-    respond_to do |format|
-      if @reservation.update(reservation_params)
-        format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully updated." }
-        format.json { render :show, status: :ok, location: @reservation }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+
+    @reservation.update(reservation_params)
+    @reservation.end_time = @reservation.end_time - 1.minute
+
+    if occupied?(@reservation)
+      redirect_to reservations_path, alert: "Ya hay una reserva para esa fecha y hora"
+    else
+      respond_to do |format|
+        if @reservation.save
+          format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
+          format.json { render :show, status: :created, location: @reservation }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

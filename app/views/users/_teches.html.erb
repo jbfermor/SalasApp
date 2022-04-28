@@ -1,7 +1,7 @@
 <div id="teches" class="col-lg-8 d-block mx-auto m-2 p-3">
   <div class="d-flex justify-content-between m-2 p-3 border-bottom">
     <h2>Técnicos</h2>
-    <% if current_user.admin? %>
+    <% unless current_user.user? %>
       <%= link_to "Añadir técnico", new_tech_path(user_id: @user), 
         class: "btn btn-sm btn-success"  %>
     <% end %>

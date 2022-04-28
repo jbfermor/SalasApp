@@ -6,14 +6,8 @@
 
 <div id="page_navigation">
   <div class="row m-1 p-2">
-    <% if current_user.admin? %>
-      <%= link_to users_path, class: "btn btn-danger" do %>
-        <%= fa_icon "arrow-left", text: " Volver a usuarios" %>
-      <% end %>
-    <% else %>
-      <%= link_to current_user, class: "btn btn-danger" do %>
-        <%= fa_icon "arrow-left", text: " Volver al perfil" %>
-      <% end %>
+    <%= link_to root_path, class: "btn btn-dark" do %>
+      <%= fa_icon "home", text: " Página Principal" %>
     <% end %>
   </div>
 </div>

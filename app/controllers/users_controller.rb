@@ -11,11 +11,13 @@ class UsersController < ApplicationController
     if current_user.admin?
       usuario = User.find(params[:id])
       @subordinates = User.where super_id: usuario
+      @teches = Tech.all
+      @rooms = Room.all
       if usuario.user?
         @teches = Tech.where user_id: usuario.super_id
         @rooms = Room.where user_id: User.find(params[:id]).super_id
         @reservations = Reservation.where user_id: User.find(params[:id]).super_id
-      else
+      elsif usuario.super?
         @teches = Tech.where user_id: usuario
         @rooms = Room.where user_id: usuario
         @reservations = Reservation.where user_id: usuario
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
       @teches = Tech.where user_id: current_user.id
       @rooms = Room.where user_id: current_user.id
       @reservations = Reservation.where user_id: current_user.id
-    else
+    elsif current_user.user?
       @subordinates = nil
       @teches = Tech.where user_id: current_user.super_id
       @rooms = Room.where user_id: current_user.super_id

@@ -5,18 +5,12 @@
   <thead>
     <tr>
       <td>Técnico</td>
-      <% if current_user.admin? %>
-        <td>Empresa</td>
-      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @teches.each do |tech| %>
     <tr>
       <td><%= link_to tech.name, tech %></td>
-      <% if current_user.admin? %>
-      <td><%= link_to tech.user.name, tech.user %></td>
-      <% end %>
     </tr>
     <% end %>
   </tbody>

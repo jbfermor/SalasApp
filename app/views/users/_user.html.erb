@@ -1,3 +1,8 @@
+<div class="ms-2">
+  <% if user.role_id == 3 %>
+    <h3>- <%= User.find(user.super_id).name%> -</h3>
+  <% end %>
+</div>
 <div id="<%= dom_id user %>"class="d-flex justify-content-between m-2 p-3 border-bottom">
   <h2><%= user.email %></h2>
   <div class="btn-group mx-3" role="group" aria-label="usuario">
@@ -39,9 +44,6 @@
   </div>
 <% end %>
 
-<div id="reservations" class="p-2 border-bottom">
-  <%= render "users/reservations" %>
-</div>
 <div id="teches" class="p-2 border-bottom">
   <%= render "users/teches" %>
 </div>

@@ -59,7 +59,7 @@
     <%= form.collection_select :tech_id, @teches, :id, :name %>
   </div>
 
-  <%= form.hidden_field :user_id, value: params[:user_id] %>
+  <%= form.hidden_field :user_id, value: params[:user_id] if params[:user_id].present? %>
 
   <div>
     <%= form.submit %>

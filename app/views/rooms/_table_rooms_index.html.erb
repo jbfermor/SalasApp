@@ -5,18 +5,12 @@
   <thead>
     <tr>
       <td>Sala</td>
-      <% if current_user.admin? %>
-        <td>Empresa</td>
-      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @rooms.each do |room| %>
     <tr>
       <td><%= link_to room.name, room %></td>
-      <% if current_user.admin? %>
-      <td><%= link_to room.user.name, room.user %></td>
-      <% end %>
     </tr>
     <% end %>
   </tbody>

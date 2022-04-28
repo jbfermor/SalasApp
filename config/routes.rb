@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :reservations
   resources :rooms
   resources :teches
+  
   post "/users", to: "users#create"
   delete "/users/:id", to: "users#destroy"
   
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :roles
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
