@@ -1,11 +1,11 @@
 module ReservationsHelper
 
   def findReservation( events, hour )
-    events.find{ |e| e[:start_time].strftime("%H") == hour.to_s }
+    events.find{ |e| e[:start_time].hour == hour }
   end
 
   def is_used(events, hour)
-    events.find{ |e| hour.to_s.between?(e[:start_time].strftime("%H"), e[:end_time].strftime("%H") )}
+    events.find{ |e| hour.between?(e[:start_time].hour, e[:end_time].hour )}
   end
 
 end

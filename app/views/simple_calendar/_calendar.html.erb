@@ -20,11 +20,17 @@
       <% date_range.each do |day| %>
         <% @hours.each do |h|%>
           <tr>   
-            <td colspan="1"> <%= h.to_s + ":00" %> </td>
+            <td> <%= h.to_s + ":00" %> </td>
             <% if is_used(sorted_events.fetch(day, []), h) %>
-              <td colspan="9" class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> 
+              <td class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> 
                 title= <%= is_used(sorted_events.fetch(day, []), h).room.name %> >
                 <%= link_to is_used(sorted_events.fetch(day, []), h).title, is_used(sorted_events.fetch(day, []), h) %> 
+              </td>
+              <td class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> >
+                <%= link_to is_used(sorted_events.fetch(day, []), h).room.name, is_used(sorted_events.fetch(day, []), h).room %>
+              </td>
+              <td class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> >
+                <%= link_to is_used(sorted_events.fetch(day, []), h).tech.name, is_used(sorted_events.fetch(day, []), h).tech %>
               </td>
             <% end %>
           </tr>
