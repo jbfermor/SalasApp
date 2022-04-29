@@ -10,4 +10,7 @@ class ApplicationController < ActionController::Base
       :phone, :email2, :role_id, :super_id])
   end
 
+  
+
+
 end

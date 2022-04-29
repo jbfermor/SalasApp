@@ -2,6 +2,7 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy ]
   before_action :set_select_collections, only: [:edit, :update, :new, :create]
   before_action :set_start_date
+  before_action :is_not_admin
 
   # GET /reservations or /reservations.json
   def index
@@ -96,6 +97,13 @@ class ReservationsController < ApplicationController
   end
 
   private
+    def is_not_admin
+      if current_user.admin?
+        flash[:alert] = "Un administrador no puede gestionar reservas"
+        redirect_to root_path 
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
