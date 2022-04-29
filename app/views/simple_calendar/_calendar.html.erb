@@ -15,7 +15,7 @@
       <tr>
         <th colspan="1">Hora</th>`
         <% @rooms.each do |room| %>
-          <th><%= room.name %></th>
+          <th><%= link_to room.name, room %></th>
         <% end %>
       </tr>
     </thead>
