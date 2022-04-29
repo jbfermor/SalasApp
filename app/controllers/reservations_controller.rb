@@ -7,17 +7,17 @@ class ReservationsController < ApplicationController
   # GET /reservations or /reservations.json
   def index
     @rooms = current_user.rooms
-    if params[:table] == "day"
+    if params[:table].present?
       if current_user.super?
-        @reservations = Reservation.where day: @start_date, user_id: current_user
+        @reservations = Reservation.where(day: @start_date, user_id: current_user).order(:start_time)
       else
-        @reservations = Reservation.where day: @start_date, user_id: current_user.super_id
+        @reservations = Reservation.where(day: @start_date, user_id: current_user.super_id).order(:start_time)
       end
     else
       if current_user.super?
-        @reservations = Reservation.where day: @start_date.all_month, user_id: current_user
+        @reservations = Reservation.where(day: @start_date.all_month, user_id: current_user).order(:start_time)
       else
-        @reservations = Reservation.where day: @start_date.all_month, user_id: current_user.super_id
+        @reservations = Reservation.where(day: @start_date.all_month, user_id: current_user.super_id).order(:start_time)
       end
     end
     
