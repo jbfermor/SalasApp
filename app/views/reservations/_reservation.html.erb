@@ -1,8 +1,10 @@
 <div id="<%= dom_id reservation %>"class="d-flex justify-content-between m-2 p-3 border-bottom">
   <h2><%= reservation.title %></h2>
   <div class="btn-group mx-3" role="group" aria-label="usuario">
-    <%= link_to edit_reservation_path, class: "btn btn-warning" do %>
-      <%= fa_icon "exchange" , text: " Editar" %>
+    <% if reservation.end_time > Time.now %>
+      <%= link_to edit_reservation_path, class: "btn btn-warning" do %>
+        <%= fa_icon "exchange" , text: " Editar" %>
+      <% end %>
     <% end %>
     <%= button_to reservation_path(reservation), method: :delete, class: "btn btn-danger" do %>
       <%= fa_icon "trash" , text: " Eliminar" %>
