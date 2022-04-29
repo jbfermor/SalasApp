@@ -5,6 +5,7 @@ class Reservation < ApplicationRecord
   belongs_to :tech
 
   validates :title, presence: true
-  validates :start_time, comparison: { greater_than: :end_time }
+  validates :start_time, comparison: { greater_than: Time.now }
+  validates :end_time, comparison: { greater_than: :start_time }
 
 end

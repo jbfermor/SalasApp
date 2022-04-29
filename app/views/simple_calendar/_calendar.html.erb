@@ -8,32 +8,36 @@
     <thead>
       <tr>
         <% date_range.each do |day| %>
-          <th colspan="10"> <%= t('date.day_names')[day.wday]%>, <%= day.strftime("%d") %> de <%= t('date.month_names')[day.month] %> </th>
+        <th colspan="10"> <%= t('date.day_names')[day.wday]%>, <%= day.strftime("%d") %> de
+          <%= t('date.month_names')[day.month] %> </th>
         <% end %>
       </tr>
       <tr>
-        <th colspan="1">Hora</th>
-        <th colspan="9">Eventos</th>
+        <th colspan="1">Hora</th>`
+        <% @rooms.each do |room| %>
+          <th><%= room.name %></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% date_range.each do |day| %>
         <% @hours.each do |h|%>
-          <tr>   
-            <td> <%= h.to_s + ":00" %> </td>
-            <% if is_used(sorted_events.fetch(day, []), h) %>
-              <td class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> 
-                title= <%= is_used(sorted_events.fetch(day, []), h).room.name %> >
-                <%= link_to is_used(sorted_events.fetch(day, []), h).title, is_used(sorted_events.fetch(day, []), h) %> 
-              </td>
-              <td class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> >
-                <%= link_to is_used(sorted_events.fetch(day, []), h).room.name, is_used(sorted_events.fetch(day, []), h).room %>
-              </td>
-              <td class= <%= "bg-success" if is_used(sorted_events.fetch(day, []), h) %> >
-                <%= link_to is_used(sorted_events.fetch(day, []), h).tech.name, is_used(sorted_events.fetch(day, []), h).tech %>
-              </td>
+          <% if is_used(sorted_events.fetch(day, []), h) %>
+            <% is_used(sorted_events.fetch(day, []), h).each do |reservation| %>
+              <tr>
+                <td> <%= h.to_s + ":00" if reservation ==  is_used(sorted_events.fetch(day, []), h).first %> </td>
+                <% @rooms.each do |room| %>
+                  <% if reservation.room.id == room.id %>
+                    <td class= <%= state_style(reservation) %> title= <%= reservation.title %> >
+                      <%= link_to reservation.title, reservation %>
+                    </td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                <% end %>
+              </tr>
             <% end %>
-          </tr>
+          <% end %>
         <% end %>
       <% end %>
     </tbody>

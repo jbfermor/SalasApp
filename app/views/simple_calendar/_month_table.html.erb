@@ -15,7 +15,13 @@
     <div class="row">
       <div class="col-1">
         <%= link_to reservation.room.name, reservation, 
-          class: "badge bg-success rounded-pill",
+          class: " badge #{ if loading?(reservation) 
+            "bg-warning"
+          elsif finished?(reservation) 
+            "bg-danger text-decoration-line-through"
+          else 
+            "rounded-pill bg-success" 
+          end } ",
           style: "width: 5rem; text-overflow: ellipsis; overflow: hidden",
           title: reservation.title %>
       </div>

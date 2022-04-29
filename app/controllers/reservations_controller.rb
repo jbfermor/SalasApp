@@ -6,26 +6,21 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-
+    @rooms = current_user.rooms
     if params[:table] == "day"
-      if current_user.admin?
-        @reservations = Reservation.where day: @start_date, user_id: params[:id] 
-      elsif current_user.super?
+      if current_user.super?
         @reservations = Reservation.where day: @start_date, user_id: current_user
       else
         @reservations = Reservation.where day: @start_date, user_id: current_user.super_id
       end
     else
-      if current_user.admin?
-        @reservations = Reservation.where day: @start_date.all_month, user_id: params[:id]
-      elsif current_user.super?
+      if current_user.super?
         @reservations = Reservation.where day: @start_date.all_month, user_id: current_user
       else
         @reservations = Reservation.where day: @start_date.all_month, user_id: current_user.super_id
       end
     end
     
-
     @hours = (8..22).to_a
     
   end
@@ -159,9 +154,7 @@ class ReservationsController < ApplicationController
     end
 
     def occupied?(reservation)
-      if current_user.admin?
-        reservations_today = Reservation.where day: @start_date.all_day, user_id: params[:id] 
-      elsif current_user.super?
+      if current_user.super?
         reservations_today = Reservation.where day: @start_date.all_day, user_id: current_user
       else
         reservations_today = Reservation.where day: @start_date.all_day, user_id: current_user.super_id
@@ -170,6 +163,7 @@ class ReservationsController < ApplicationController
       done = false
 
       reservations_today.each do |r|
+        next if reservation.id == r.id
         if r.start_time.between?(reservation.start_time, reservation.end_time) || r.end_time.between?(reservation.start_time, reservation.end_time)
           if r.room_id == reservation.room_id
             done = true
