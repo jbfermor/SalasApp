@@ -99,6 +99,8 @@ GEM
     ffi (1.15.5-x64-mingw32)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -245,6 +247,7 @@ DEPENDENCIES
   debug
   devise
   font-awesome-rails
+  friendly_id (~> 5.4.0)
   importmap-rails
   jbuilder
   pg (~> 1.1)

@@ -10,14 +10,14 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     if current_user.admin?
-      usuario = User.find(params[:id])
+      usuario = User.friendly.find(params[:id])
       @subordinates = User.where super_id: usuario
       @teches = Tech.all
       @rooms = Room.all
       if usuario.user?
         @teches = Tech.where user_id: usuario.super_id
-        @rooms = Room.where user_id: User.find(params[:id]).super_id
-        @reservations = Reservation.where user_id: User.find(params[:id]).super_id
+        @rooms = Room.where user_id: User.friendly.find(params[:id]).super_id
+        @reservations = Reservation.where user_id: User.friendly.find(params[:id]).super_id
       elsif usuario.super?
         @teches = Tech.where user_id: usuario
         @rooms = Room.where user_id: usuario
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @user.destroy
 
     respond_to do |format|
@@ -108,7 +108,7 @@ class UsersController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -36,6 +36,9 @@ gem "devise"
 # Calendar
 gem "simple_calendar", "~> 2.4"
 
+#Friendly_id
+gem 'friendly_id', '~> 5.4.0'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
