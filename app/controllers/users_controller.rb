@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :is_admin, except: :show
+  before_action :is_user
+  before_action :is_super, only: %i[ index ]
 
   # GET /users or /users.json
   def index
@@ -99,9 +100,14 @@ class UsersController < ApplicationController
 
   private
 
-  def is_admin
-    if !current_user.admin?
-      flash[:alert] = "Si no eres administrador no puede gestionar usuarios"
+  def is_user
+    if current_user.user?
+      redirect_to root_path 
+    end
+  end
+
+  def is_super
+    if current_user.super?
       redirect_to root_path 
     end
   end
