@@ -91,7 +91,7 @@
   <% end %>
 
   <% if params[:super_id].present? %>
-    <%= form.hidden_field :super_id, :value => params[:super_id] %>
+    <%= form.hidden_field :super_id, :value => User.friendly.find(params[:super_id]).id %>
   <% end %>
   <div class="row">
     <div class="col-12 col-lg-6 ml-2 mt-3">
