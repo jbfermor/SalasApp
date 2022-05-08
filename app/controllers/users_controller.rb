@@ -17,8 +17,8 @@ class UsersController < ApplicationController
       @rooms = Room.all
       if usuario.user?
         @teches = Tech.where user_id: usuario.super_id
-        @rooms = Room.where user_id: User.friendly.find(params[:id]).super_id
-        @reservations = Reservation.where user_id: User.friendly.find(params[:id]).super_id
+        @rooms = Room.where user_id: usuario.super_id
+        @reservations = Reservation.where user_id: usuario.super_id
       elsif usuario.super?
         @teches = Tech.where user_id: usuario
         @rooms = Room.where user_id: usuario
