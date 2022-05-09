@@ -31,6 +31,11 @@
  *= require simple_calendar
  
  */
+
+.day:hover {
+    filter: brightness(0.5);
+    color: red
+  }
  
  /* unvisited link */
  a:link {
@@ -91,3 +96,5 @@ table > thead {
 table > :not(:last-child) > :last-child > * {
   border-bottom-color: currentColor;
 }
+
+
