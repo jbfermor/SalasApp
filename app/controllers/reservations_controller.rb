@@ -48,15 +48,11 @@ class ReservationsController < ApplicationController
     if occupied?(@reservation)
         redirect_to reservations_path, alert: "Ya hay una reserva para esa fecha y hora"
     else
-      respond_to do |format|
         if @reservation.save
-          format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
-          format.json { render :show, status: :created, location: @reservation }
+          redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." 
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+          render :new, status: :unprocessable_entity 
         end
-      end
     end
   end
 
@@ -69,26 +65,18 @@ class ReservationsController < ApplicationController
     if occupied?(@reservation)
       redirect_to reservations_path, alert: "Ya hay una reserva para esa fecha y hora"
     else
-      respond_to do |format|
         if @reservation.save
-          format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
-          format.json { render :show, status: :created, location: @reservation }
+          redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." 
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+          render :new, status: :unprocessable_entity 
         end
-      end
     end
   end
 
   # DELETE /reservations/1 or /reservations/1.json
   def destroy
-    @reservation.destroy
-
-    respond_to do |format|
-      format.html { redirect_to reservations_url, notice: "Reservation was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    Reservation.friendly.find(params[:id]).destroy
+    redirect_to reservations_url, notice: "Reservation was successfully destroyed." 
   end
 
   private

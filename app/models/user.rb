@@ -13,11 +13,11 @@ class User < ApplicationRecord
   belongs_to :role
 
   belongs_to :super, class_name: "User", optional: true
-  has_many :subordinates, class_name: "User", foreign_key: "super_id"
+  has_many :subordinates, class_name: "User", foreign_key: "super_id", dependent: :delete_all
 
-  has_many :rooms
-  has_many :teches
-  has_many :reservations
+  has_many :rooms, dependent: :delete_all
+  has_many :teches, dependent: :delete_all
+  has_many :reservations, dependent: :delete_all
 
   validates :name, presence: true
   validates :pc, length: {is: 5,
