@@ -21,12 +21,12 @@
 
   <div>
     <%= form.label :start_time, style: "display: block" %>
-    <%= form.time_select :start_time, {minute_step: 30} %>
+    <%= form.time_select :start_time, {start_hour: 8, end_hour: 22, minute_step: 30} %>
   </div>
 
   <div>
     <%= form.label :end_time, style: "display: block" %>
-    <%= form.time_select :end_time, {minute_step: 30} %>
+    <%= form.time_select :end_time, {start_hour: 8, end_hour: 22, minute_step: 30} %>
   </div>
 
   <div>
