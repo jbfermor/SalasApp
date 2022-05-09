@@ -19,7 +19,7 @@
         <tr>
           <% week.each do |day| %>
             <%= content_tag :td,
-              { title: day.strftime("%D"),
+              { title: day.strftime("%d/%m/%Y"),
                 class: calendar.td_classes_for(day), 
                 id: "month_table_day",
                 onclick: "location.href='#{reservations_path(start_date: day, table: "day")}'" } do %>
