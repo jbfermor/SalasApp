@@ -5,7 +5,7 @@
     <%= link_to t('simple_calendar.next', default: 'Siguiente'), calendar.url_for_next_view, class: "btn btn-sm btn-primary" %>
   </div>
 
-  <table class="table table-striped">
+  <table class="">
     <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
@@ -19,7 +19,8 @@
         <tr>
           <% week.each do |day| %>
             <%= content_tag :td,
-              { class: calendar.td_classes_for(day), 
+              { title: day.strftime("%D"),
+                class: calendar.td_classes_for(day), 
                 id: "month_table_day",
                 onclick: "location.href='#{reservations_path(start_date: day, table: "day")}'" } do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>

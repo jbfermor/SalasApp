@@ -14,7 +14,7 @@
  *= require_self
  */
 
- /*
+/*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -33,12 +33,16 @@
  */
 
 .day:hover {
-    filter: brightness(0.5);
-    color: red
-  }
- 
- /* unvisited link */
- a:link {
+  filter: brightness(0.5);
+  color: red
+}
+
+.current-month {
+  background-color: rgb(200, 195, 195);
+}
+
+/* unvisited link */
+a:link {
   text-decoration: none;
 }
 
@@ -66,35 +70,33 @@ table {
   -webkit-overflow-scrolling: touch;
 }
 
-table > :not(caption) > * > * {
+table> :not(caption)>*>* {
   padding: 0.25rem 0.25rem;
   background-color: var(--bs-table-bg);
   border-bottom-width: 1px;
   box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
 }
 
-table > tbody {
+table>tbody {
   vertical-align: inherit;
 }
 
-table > tbody > tr:nth-of-type(odd) {
+table>tbody>tr:nth-of-type(odd) {
   --bs-table-accent-bg: var(--bs-table-striped-bg);
   color: var(--bs-table-striped-color);
 }
 
-table > tbody > tr:hover {
+table>tbody>tr:hover {
   --bs-table-accent-bg: var(--bs-table-hover-bg);
   color: var(--bs-table-hover-color);
 }
 
-table > thead {
+table>thead {
   vertical-align: bottom;
   background-color: #212529;
   color: #fff;
 }
 
-table > :not(:last-child) > :last-child > * {
+table> :not(:last-child)> :last-child>* {
   border-bottom-color: currentColor;
 }
-
-
