@@ -21,9 +21,10 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :pc, length: {is: 5,
-    message: "El Código Postal debe tener 5 caracteres"}, allow_blank: true
-  validates :pc, format: { without: /\D/,
-    message: "Sólo permite números" }, allow_blank: true
+    message: "El Código Postal debe tener 5 caracteres"},
+    format: { without: /\D/,
+      message: "Sólo permite números" },
+    allow_blank: true
   validates :email2, format: { with: /\A[\w.+-]+@\w+\.\w+\z/,
     message: "El formato del mail alternativo no es correcto" }, allow_blank: true
 

@@ -6,18 +6,22 @@ class ReservationsController < ApplicationController
 
   # GET /reservations or /reservations.json
   def index
-    @rooms = current_user.rooms
+    
     if params[:table].present?
       if current_user.super?
         @reservations = Reservation.where(day: @start_date, user_id: current_user).order(:start_time)
+        @rooms = current_user.rooms
       else
         @reservations = Reservation.where(day: @start_date, user_id: current_user.super_id).order(:start_time)
+        @rooms = User.find(current_user.super_id).rooms
       end
     else
       if current_user.super?
         @reservations = Reservation.where(day: @start_date.all_month, user_id: current_user).order(:start_time)
+        @rooms = current_user.rooms
       else
         @reservations = Reservation.where(day: @start_date.all_month, user_id: current_user.super_id).order(:start_time)
+        @rooms = User.find(current_user.super_id).rooms
       end
     end
     
@@ -116,8 +120,12 @@ class ReservationsController < ApplicationController
         29)
       end
 
-    reservation.room_id = params[:reservation]["room_id"].to_i
-    reservation.user_id = current_user.id if params[:user_id].nil?
+      reservation.room_id = params[:reservation]["room_id"].to_i
+      if current_user.super?
+        reservation.user_id = current_user.id if params[:user_id].nil?
+      else
+        reservation.user_id = current_user.super_id if params[:user_id].nil?
+      end
     end
 
     def set_select_collections

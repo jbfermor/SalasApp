@@ -28,7 +28,7 @@
                 <td> <%= h.to_s + ":00" if reservation ==  is_used(sorted_events.fetch(day, []), h).first %> </td>
                 <% @rooms.each do |room| %>
                   <% if reservation.room.id == room.id %>
-                    <td class= <%= state_style(reservation) %> title= <%= reservation.title %> >
+                    <td class= <%= state_style(reservation) %> title= <%= " #{reservation.start_time.strftime( "%H:%M" )}/#{reservation.end_time.strftime( "%H:%M" )} " %> >
                       <%= link_to reservation.title, reservation %>
                     </td>
                   <% else %>

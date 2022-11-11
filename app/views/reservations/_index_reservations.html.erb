@@ -8,11 +8,7 @@
       <% end %>
     </div>
 
-    <% if params[:table] == "week" %>
-    <div id="calendario" class="col-lg-8 d-block mx-auto m-2 p-3">
-      <%= render "simple_calendar/week_table" %>
-    </div>
-    <% elsif params[:table] == "day"%>
+    <% if params[:table] == "day"%>
     <div id="calendario" class="col-lg-8 d-block mx-auto m-2 p-3">
       <%= render "simple_calendar/day_table" %>
     </div>
