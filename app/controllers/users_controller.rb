@@ -10,31 +10,30 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    if current_user.admin?
-      usuario = User.friendly.find(params[:id])
+    usuario = User.friendly.find(params[:id])
+    if current_user.admin? 
       @subordinates = User.where super_id: usuario
       @teches = Tech.all
       @rooms = Room.all
+    else
+      user_id = nil
       if usuario.user?
-        @teches = Tech.where user_id: usuario.super_id
-        @rooms = Room.where user_id: usuario.super_id
-        @reservations = Reservation.where user_id: usuario.super_id
+        user_id = usuario.super_id
       elsif usuario.super?
-        @teches = Tech.where user_id: usuario
-        @rooms = Room.where user_id: usuario
-        @reservations = Reservation.where user_id: usuario
+        user_id = usuario
       end
-    elsif current_user.super?
-      @subordinates = User.where super_id: current_user.id
-      @teches = Tech.where user_id: current_user.id
-      @rooms = Room.where user_id: current_user.id
-      @reservations = Reservation.where user_id: current_user.id
-    elsif current_user.user?
-      @subordinates = nil
-      @teches = Tech.where user_id: current_user.super_id
-      @rooms = Room.where user_id: current_user.super_id
-      @reservations = Reservation.where user_id: current_user.super_id
-    end 
+      if current_user.super?
+        user_id = current_user.id
+        @subordinates = User.where super_id: user_id
+      elsif current_user.user?
+        @subordinates = nil
+        user_id = current_user.super_id
+      end
+      @teches = Tech.where user_id: user_id
+      @rooms = Room.where user_id: user_id
+      @reservations = Reservation.where user_id: user_id
+    end
+
   end
 
   # GET /users/new
@@ -49,20 +48,11 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-
-    if @user.role_id.blank?
-      @user.role_id = 3
-    end
+    @user.check_ids
 
     if current_user.user? 
       redirect_to user_url(@user), notice: "No tienes permiso para crear usuarios" 
-    end
-
-    if @user.super_id.blank?
-      @user.super_id = current_user.id
-    end
-    
-    if @user.save
+    elsif @user.save
         redirect_to @user, notice: "User was successfully created." 
     else
         render :new, status: :unprocessable_entity 

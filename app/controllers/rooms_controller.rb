@@ -23,9 +23,7 @@ class RoomsController < ApplicationController
   # POST /rooms or /rooms.json
   def create
     @room = Room.new(room_params)
-    if @room.user_id.nil?
-      @room.user = current_user
-    end
+    @room.user_nil?
 
       if @room.save
         redirect_to room_url(@room), notice: "Room was successfully created." 

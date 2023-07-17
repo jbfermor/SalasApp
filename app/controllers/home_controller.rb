@@ -2,16 +2,16 @@ class HomeController < ApplicationController
   
   def index
     @users = User.all
-
     @start_date = Date.today
+    user_id = nil
     if current_user.admin?
-      @reservations = Reservation.where day: @start_date.all_month, user_id: params[:id]
+      user_id = params[:id]
     elsif current_user.super?
-      @reservations = Reservation.where day: @start_date.all_month, user_id: current_user
+      user_id = current_user
     else
-      @reservations = Reservation.where day: @start_date.all_month, user_id: current_user.super_id
+      user_id = current_user.super_id
     end
-
+    @reservations = Reservation.where day: @start_date.all_month, user_id: user_id
   end
 
 end

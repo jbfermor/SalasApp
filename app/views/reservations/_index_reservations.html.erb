@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between m-2 p-3 border-bottom">
       <h2>Reservas <%= params[:table].present? ? "del día" : "del mes" %></h2>
       <%= link_to new_reservation_path, class: "btn btn-success" do %>
-      <%= fa_icon "plus", text: "Nueva reserva" %>
+        <%= fa_icon "plus", text: "Nueva reserva" %>
       <% end %>
     </div>
 

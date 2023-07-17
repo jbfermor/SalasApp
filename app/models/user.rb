@@ -40,5 +40,15 @@ class User < ApplicationRecord
   def user?
     role.id == 3
   end
+
+  def check_ids
+    if self.role_id.blank?
+      self.role_id = 3
+    end
+
+    if self.super_id.blank?
+      self.super_id = current_user.id
+    end
+  end
   
 end
